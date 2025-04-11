@@ -1,5 +1,5 @@
 basePath: /api
-host: localhost:8080
+host: gloo-api-production.up.railway.app
 info:
   contact:
     email: support@gloo.com
@@ -27,4 +27,6 @@ paths:
       summary: Hello World endpoint
       tags:
       - root
+schemes:
+- https
 swagger: "2.0"

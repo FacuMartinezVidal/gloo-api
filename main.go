@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	_ "gloo-api/docs"
 	"os"
 
@@ -18,8 +17,9 @@ import (
 //	@contact.email	support@gloo.com
 //	@license.name	Apache 2.0
 //	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
-//	@host			localhost:8080
+//	@host			gloo-api-production.up.railway.app
 //	@BasePath		/api
+//	@schemes		https
 
 func main() {
 	app := fiber.New(fiber.Config{
@@ -38,16 +38,10 @@ func main() {
 		port = "8080"
 	}
 
-	// Update Swagger host based on PORT
-	host := fmt.Sprintf("localhost:%s", port)
-	if os.Getenv("RAILWAY_STATIC_URL") != "" {
-		host = os.Getenv("RAILWAY_STATIC_URL")
-	}
-
 	// Swagger configuration
 	app.Static("/swagger", "./docs")
 	app.Get("/swagger/*", swagger.New(swagger.Config{
-		URL: fmt.Sprintf("http://%s/swagger/swagger.json", host),
+		URL: "https://gloo-api-production.up.railway.app/swagger/swagger.json",
 		DeepLinking: false,
 		DocExpansion: "none",
 	}))

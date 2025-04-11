@@ -52,9 +52,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "gloo-api-production.up.railway.app",
 	BasePath:         "/api",
-	Schemes:          []string{},
+	Schemes:          []string{"https"},
 	Title:            "Gloo API",
 	Description:      "API documentation for Gloo",
 	InfoInstanceName: "swagger",

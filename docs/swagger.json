@@ -1,4 +1,7 @@
 {
+    "schemes": [
+        "https"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "API documentation for Gloo",
@@ -14,7 +17,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "gloo-api-production.up.railway.app",
     "basePath": "/api",
     "paths": {
         "/": {
