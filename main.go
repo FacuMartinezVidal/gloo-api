@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	_ "gloo-api/docs"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -30,10 +32,22 @@ func main() {
 	// CORS
 	app.Use(cors.New())
 
+	// Get port from environment variable
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	// Update Swagger host based on PORT
+	host := fmt.Sprintf("localhost:%s", port)
+	if os.Getenv("RAILWAY_STATIC_URL") != "" {
+		host = os.Getenv("RAILWAY_STATIC_URL")
+	}
+
 	// Swagger configuration
 	app.Static("/swagger", "./docs")
 	app.Get("/swagger/*", swagger.New(swagger.Config{
-		URL: "http://localhost:8080/swagger/swagger.json",
+		URL: fmt.Sprintf("http://%s/swagger/swagger.json", host),
 		DeepLinking: false,
 		DocExpansion: "none",
 	}))
@@ -41,7 +55,7 @@ func main() {
 	api := app.Group("/api")
 	api.Get("/", helloWorld)
 
-	app.Listen(":8080")
+	app.Listen(":" + port)
 }
 
 // @Summary		Hello World endpoint
