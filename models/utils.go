@@ -1,9 +1,8 @@
 package models
 
 type BaseResponse struct {
-	Status     string      `json:"status"`
-	StatusCode int         `json:"status_code"`
-	Success    bool        `json:"success"`
-	Message    string      `json:"message,omitempty"`
+	Status     string      `json:"status" example:"success"`
+	StatusCode int         `json:"status_code" example:"200"`
+	Success    bool        `json:"success" example:"true"`
 	Data       interface{} `json:"data,omitempty"`
 }

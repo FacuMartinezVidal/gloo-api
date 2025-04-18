@@ -47,9 +47,9 @@ func main() {
 		DocExpansion: "none",
 	}))
 
-	app.Get("/recipes", routes.GetAllRecipe)
-
-
+	routes.SetupRecipesRoutes(app)
+	routes.SetupCollectionsRoutes(app)
+	routes.SetupSearchRoutes(app)
 	app.Listen(":" + port)
 }
 

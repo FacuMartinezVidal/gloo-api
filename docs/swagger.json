@@ -20,6 +20,890 @@
     "host": "gloo-api-production.up.railway.app",
     "basePath": "/api",
     "paths": {
+        "/collections/{userId}": {
+            "get": {
+                "description": "Get all collections",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Get all collections",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved collections",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetAllCollectionsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a collection",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Create a collection",
+                "parameters": [
+                    {
+                        "description": "Collection",
+                        "name": "collection",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateCollectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Collection created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/collections/{userId}/{collectionId}": {
+            "get": {
+                "description": "Get collection by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Get collection by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Collection ID",
+                        "name": "collectionId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved collection",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetCollectionByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments/{recipeId}/{commentId}": {
+            "get": {
+                "description": "Get a specific comment by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get comment by ID",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "commentId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved comment",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetCommentByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a specific comment by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update comment",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "commentId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Comment",
+                        "name": "comment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateCommentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated comment",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a specific comment by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete comment",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "commentId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted comment",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments/{recipeId}/{userId}/{fatherCommentId}": {
+            "post": {
+                "description": "Create a new comment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create comment",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Father Comment ID",
+                        "name": "fatherCommentId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Comment",
+                        "name": "comment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateCommentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created comment",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/favorites/{userId}": {
+            "get": {
+                "description": "Get favorites",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Get favorites",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved favorites",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetFavoritesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/ingredients/{recipeId}/{ingredientId}": {
+            "put": {
+                "description": "Update a specific ingredient by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Update ingredient",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Ingredient ID",
+                        "name": "ingredientId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Ingredient",
+                        "name": "ingredient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateIngredientRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated ingredient",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Ingredient not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new ingredient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Create ingredient",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Ingredient ID",
+                        "name": "ingredientId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Ingredient",
+                        "name": "ingredient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateIngredientRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created ingredient",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Ingredient not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a specific ingredient by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Delete ingredient",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Ingredient ID",
+                        "name": "ingredientId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted ingredient",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Ingredient not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/instructions/{recipeId}/{instructionId}": {
+            "get": {
+                "description": "Get a specific instruction by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Instructions"
+                ],
+                "summary": "Get instruction by ID",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Instruction ID",
+                        "name": "instructionId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved instruction",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetInstructionByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Instruction not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a specific instruction by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Instructions"
+                ],
+                "summary": "Update instruction",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Instruction ID",
+                        "name": "instructionId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Instruction",
+                        "name": "instruction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateInstructionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated instruction",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Instruction not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new instruction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Instructions"
+                ],
+                "summary": "Create instruction",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Instruction ID",
+                        "name": "instructionId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Instruction",
+                        "name": "instruction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateInstructionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created instruction",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Instruction not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a specific instruction by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Instructions"
+                ],
+                "summary": "Delete instruction",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Instruction ID",
+                        "name": "instructionId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted instruction",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Instruction not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/recipes": {
             "get": {
                 "description": "Get all recipes by search and category",
@@ -51,19 +935,7 @@
                     "200": {
                         "description": "Successfully retrieved recipes",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.BaseResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/routes.GetAllRecipeResponseData"
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/models.GetAllRecipesResponse"
                         }
                     },
                     "400": {
@@ -74,6 +946,116 @@
                     },
                     "404": {
                         "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/admin/{organizationId}": {
+            "get": {
+                "description": "Get a specific recipe by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Get recipe",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Organization ID",
+                        "name": "organizationId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved recipe",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetAllRecipeAdminResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Recipe not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/admin/{recipeId}/{adminId}": {
+            "post": {
+                "description": "Update a specific recipe by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Update recipe",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Admin ID",
+                        "name": "adminId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated recipe",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Recipe not found",
                         "schema": {
                             "$ref": "#/definitions/models.ErrorNotFoundResponse"
                         }
@@ -114,19 +1096,114 @@
                     "200": {
                         "description": "Successfully retrieved recipe",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.BaseResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/models.Recipe"
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/models.GetRecipeByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Recipe not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a specific recipe by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Update recipe",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Recipe",
+                        "name": "recipe",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateRecipeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated recipe",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateRecipeRequest"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Recipe not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a specific recipe by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Delete recipe",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted recipe",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteRecipeRequest"
                         }
                     },
                     "400": {
@@ -149,31 +1226,523 @@
                     }
                 }
             }
+        },
+        "/recipes/{userId}": {
+            "post": {
+                "description": "Create a new recipe",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Create recipe",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Recipe",
+                        "name": "recipe",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateRecipeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully created recipe",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateRecipeRequest"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/search/{userId}": {
+            "get": {
+                "description": "Get all searches",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Search"
+                ],
+                "summary": "Get all searches",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved searches",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetAllSearchesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/search/{userId}/suggestions": {
+            "get": {
+                "description": "Get all suggestions",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Search"
+                ],
+                "summary": "Get all suggestions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved searches",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetAllSearchesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "put": {
+                "description": "Update user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "User",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated user",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/change": {
+            "get": {
+                "description": "Get change",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get change",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved change",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetChangeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/profile": {
+            "get": {
+                "description": "Get profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved profile",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetProfileResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{userId}": {
+            "get": {
+                "description": "Get user by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved user",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetUserByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "models.BaseResponse": {
+        "models.CreateCollectionRequest": {
             "type": "object",
             "properties": {
-                "data": {},
+                "title": {
+                    "type": "string",
+                    "example": "Salty"
+                }
+            }
+        },
+        "models.CreateCommentRequest": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string",
+                    "example": "This is a comment"
+                },
+                "father_comment_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "recipe_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "models.CreateIngredientRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "onion"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Chicken"
+                },
+                "quantity": {
+                    "type": "string",
+                    "example": "100"
+                },
+                "unit": {
+                    "type": "string",
+                    "example": "kg"
+                }
+            }
+        },
+        "models.CreateInstructionRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "Chop the chicken into small cubes or finely mince it (you can also use a food processor). This makes it easier to form patties later."
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "https://example.com/image.png"
+                },
+                "step": {
+                    "type": "string",
+                    "example": "1"
+                }
+            }
+        },
+        "models.CreateRecipeRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "A feast for the senses"
+                },
+                "estimated_time": {
+                    "type": "string",
+                    "example": "20 minutes"
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "https://example.com/image.png"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Chicken Wings"
+                }
+            }
+        },
+        "models.CreateResponse": {
+            "type": "object",
+            "properties": {
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Created successfully"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "success"
                 },
                 "status_code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 201
                 },
                 "success": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.DeleteRecipeRequest": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Deleted successfully"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.DeleteResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Deleted successfully"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
                 }
             }
         },
         "models.ErrorBadRequestResponse": {
             "type": "object",
             "properties": {
-                "data": {},
                 "message": {
                     "type": "string",
                     "example": "Bad Request"
@@ -195,7 +1764,6 @@
         "models.ErrorInternalServerErrorResponse": {
             "type": "object",
             "properties": {
-                "data": {},
                 "message": {
                     "type": "string",
                     "example": "Internal Server Error"
@@ -217,7 +1785,6 @@
         "models.ErrorNotFoundResponse": {
             "type": "object",
             "properties": {
-                "data": {},
                 "message": {
                     "type": "string",
                     "example": "Not Found"
@@ -236,67 +1803,955 @@
                 }
             }
         },
-        "models.Recipe": {
+        "models.GetAllCollectionsResponse": {
             "type": "object",
             "properties": {
-                "category": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "favorites": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "estimated_time": {
+                                            "type": "string",
+                                            "example": "25 minutes"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "image_url": {
+                                            "type": "string",
+                                            "example": "https://example.com/image.png"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Chicken Wings"
+                                        },
+                                        "total_stars": {
+                                            "type": "number",
+                                            "example": 4.5
+                                        }
+                                    }
+                                }
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Salty"
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved collections"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetAllRecipeAdminResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string",
+                                "example": "A feast for the senses"
+                            },
+                            "estimated_time": {
+                                "type": "string",
+                                "example": "20 minutes"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "image_url": {
+                                "type": "string",
+                                "example": "https://example.com/image.png"
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Chicken Wings"
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved recipe"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetAllRecipesResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "category": {
+                                "type": "string",
+                                "example": "Chicken"
+                            },
+                            "created_by": {
+                                "type": "string",
+                                "example": "@facu.potti"
+                            },
+                            "description": {
+                                "type": "string",
+                                "example": "A feast for the senses"
+                            },
+                            "estimated_time": {
+                                "type": "string",
+                                "example": "20 minutes"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "image_url": {
+                                "type": "string",
+                                "example": "https://example.com/image.png"
+                            },
+                            "searchParam": {
+                                "type": "string",
+                                "example": "chicken"
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Chicken Wings"
+                            },
+                            "total_comments": {
+                                "type": "integer",
+                                "example": 64
+                            },
+                            "total_favorites": {
+                                "type": "integer",
+                                "example": 4445
+                            },
+                            "total_stars": {
+                                "type": "number",
+                                "example": 4
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved recipes"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetAllSearchesResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "created_at": {
+                                "type": "string",
+                                "example": "2021-01-01T00:00:00Z"
+                            },
+                            "created_by": {
+                                "type": "string",
+                                "example": "@facu.potti"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "search_term": {
+                                "type": "string",
+                                "example": "Salty"
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved searches"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetChangeResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "estimated_time": {
+                                "type": "string",
+                                "example": "25 minutes"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "image_url": {
+                                "type": "string",
+                                "example": "https://example.com/image.png"
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Chicken Wings"
+                            },
+                            "total_stars": {
+                                "type": "number",
+                                "example": 4.5
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved change"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetCollectionByIdResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "favorites": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "estimated_time": {
+                                        "type": "string",
+                                        "example": "25 minutes"
+                                    },
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "https://example.com/image.png"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Chicken Wings"
+                                    },
+                                    "total_stars": {
+                                        "type": "number",
+                                        "example": 4.5
+                                    }
+                                }
+                            }
+                        },
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "title": {
+                            "type": "string",
+                            "example": "Salty"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved collection"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetCommentByIdResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "comment": {
+                            "type": "string",
+                            "example": "This is a comment"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2021-01-01T00:00:00Z"
+                        },
+                        "created_by": {
+                            "type": "string",
+                            "example": "@facu.potti"
+                        },
+                        "father_comment": {
+                            "type": "object",
+                            "properties": {
+                                "comment": {
+                                    "type": "string",
+                                    "example": "This is a comment"
+                                },
+                                "created_at": {
+                                    "type": "string",
+                                    "example": "2021-01-01T00:00:00Z"
+                                },
+                                "created_by": {
+                                    "type": "string",
+                                    "example": "@facu.potti"
+                                },
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                }
+                            }
+                        },
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "total_likes": {
+                            "type": "integer",
+                            "example": 100
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved comment"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetFavoritesResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "estimated_time": {
+                                "type": "string",
+                                "example": "25 minutes"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "image_url": {
+                                "type": "string",
+                                "example": "https://example.com/image.png"
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Chicken Wings"
+                            },
+                            "total_stars": {
+                                "type": "number",
+                                "example": 4.5
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved favorites"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetInstructionByIdResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string",
+                            "example": "Chop the chicken into small cubes or finely mince it (you can also use a food processor). This makes it easier to form patties later."
+                        },
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "image_url": {
+                            "type": "string",
+                            "example": "https://example.com/image.png"
+                        },
+                        "ingredients": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "example": "onion"
+                                    },
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Chicken"
+                                    },
+                                    "quantity": {
+                                        "type": "string",
+                                        "example": "100"
+                                    },
+                                    "unit": {
+                                        "type": "string",
+                                        "example": "kg"
+                                    }
+                                }
+                            }
+                        },
+                        "step": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved instruction"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetProfileResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string",
+                            "example": "I'm a software engineer"
+                        },
+                        "email": {
+                            "type": "string",
+                            "example": "facu.potti@gmail.com"
+                        },
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Facu Potti"
+                        },
+                        "profile_picture": {
+                            "type": "string",
+                            "example": "https://example.com/image.png"
+                        },
+                        "total_followers": {
+                            "type": "integer",
+                            "example": 250
+                        },
+                        "total_following": {
+                            "type": "integer",
+                            "example": 120
+                        },
+                        "total_posts": {
+                            "type": "integer",
+                            "example": 120
+                        },
+                        "username": {
+                            "type": "string",
+                            "example": "@facu.potti"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved profile"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetRecipeByIdResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "comments": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "comment": {
+                                            "type": "string",
+                                            "example": "This is a comment"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-01-01T00:00:00Z"
+                                        },
+                                        "created_by": {
+                                            "type": "string",
+                                            "example": "@facu.potti"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    }
+                                }
+                            },
+                            "created_by": {
+                                "type": "string",
+                                "example": "@facu.potti"
+                            },
+                            "description": {
+                                "type": "string",
+                                "example": "A feast for the senses"
+                            },
+                            "estimated_time": {
+                                "type": "string",
+                                "example": "20 minutes"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "image_url": {
+                                "type": "string",
+                                "example": "https://example.com/image.png"
+                            },
+                            "ingredients": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string",
+                                            "example": "onion"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Chicken"
+                                        },
+                                        "quantity": {
+                                            "type": "string",
+                                            "example": "100"
+                                        },
+                                        "unit": {
+                                            "type": "string",
+                                            "example": "kg"
+                                        }
+                                    }
+                                }
+                            },
+                            "instructions": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Chop the chicken into small cubes or finely mince it (you can also use a food processor). This makes it easier to form patties later."
+                                        },
+                                        "image_url": {
+                                            "type": "string",
+                                            "example": "https://example.com/image.png"
+                                        },
+                                        "step": {
+                                            "type": "string",
+                                            "example": "1"
+                                        }
+                                    }
+                                }
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Chicken Wings"
+                            },
+                            "total_comments": {
+                                "type": "integer",
+                                "example": 64
+                            },
+                            "total_favorites": {
+                                "type": "integer",
+                                "example": 4445
+                            },
+                            "total_stars": {
+                                "type": "number",
+                                "example": 4
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved recipe"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetUserByIdResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string",
+                            "example": "I'm a software engineer"
+                        },
+                        "email": {
+                            "type": "string",
+                            "example": "facu.potti@gmail.com"
+                        },
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Facu Potti"
+                        },
+                        "profile_picture": {
+                            "type": "string",
+                            "example": "https://example.com/image.png"
+                        },
+                        "social_media": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://twitter.com/facu.potti"
+                                    }
+                                }
+                            }
+                        },
+                        "username": {
+                            "type": "string",
+                            "example": "@facu.potti"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved user"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.UpdateCommentRequest": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string",
+                    "example": "This is a comment"
+                }
+            }
+        },
+        "models.UpdateIngredientRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "onion"
+                },
+                "name": {
                     "type": "string",
                     "example": "Chicken"
                 },
-                "created_by": {
+                "quantity": {
                     "type": "string",
-                    "example": "@facu.potti"
+                    "example": "100"
                 },
+                "unit": {
+                    "type": "string",
+                    "example": "kg"
+                }
+            }
+        },
+        "models.UpdateInstructionRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "Chop the chicken into small cubes or finely mince it (you can also use a food processor). This makes it easier to form patties later."
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "https://example.com/image.png"
+                },
+                "step": {
+                    "type": "string",
+                    "example": "1"
+                }
+            }
+        },
+        "models.UpdateRecipeRequest": {
+            "type": "object",
+            "properties": {
                 "description": {
                     "type": "string",
                     "example": "A feast for the senses"
                 },
                 "estimated_time": {
                     "type": "string",
-                    "example": "15 minutes"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
+                    "example": "20 minutes"
                 },
                 "image_url": {
                     "type": "string",
                     "example": "https://example.com/image.png"
                 },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string",
+                                "example": "onion"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Chicken"
+                            },
+                            "quantity": {
+                                "type": "string",
+                                "example": "100"
+                            },
+                            "unit": {
+                                "type": "string",
+                                "example": "kg"
+                            }
+                        }
+                    }
+                },
+                "instructions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string",
+                                "example": "Chop the chicken into small cubes or finely mince it (you can also use a food processor). This makes it easier to form patties later."
+                            },
+                            "step": {
+                                "type": "string",
+                                "example": "1"
+                            }
+                        }
+                    }
+                },
                 "title": {
                     "type": "string",
                     "example": "Chicken Wings"
-                },
-                "total_comments": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "total_likes": {
-                    "type": "integer",
-                    "example": 20
-                },
-                "total_stars": {
-                    "type": "number",
-                    "example": 4.5
                 }
             }
         },
-        "routes.GetAllRecipeResponseData": {
+        "models.UpdateResponse": {
             "type": "object",
             "properties": {
-                "category": {
+                "message": {
                     "type": "string",
-                    "example": "Chicken"
+                    "example": "Updated successfully"
                 },
-                "recipes": {
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.UpdateUserRequest": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "I'm a software engineer"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "facu.potti@gmail.com"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Facu Potti"
+                },
+                "profile_picture": {
+                    "type": "string",
+                    "example": "https://example.com/image.png"
+                },
+                "social_media": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/models.Recipe"
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string",
+                                "example": "https://twitter.com/facu.potti"
+                            }
+                        }
                     }
                 },
-                "searchParam": {
+                "username": {
                     "type": "string",
-                    "example": "chicken"
+                    "example": "@facu.potti"
                 }
             }
         }
