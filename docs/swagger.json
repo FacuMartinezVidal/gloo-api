@@ -51,19 +51,37 @@
                     "200": {
                         "description": "Successfully retrieved recipes",
                         "schema": {
-                            "$ref": "#/definitions/models.RecipeExampleResponse"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/routes.GetAllRecipeResponseData"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
                         }
                     }
                 }
@@ -114,19 +132,19 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
                         }
                     },
                     "404": {
                         "description": "Recipe not found",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
                         }
                     }
                 }
@@ -152,13 +170,13 @@
                 }
             }
         },
-        "models.ErrorResponse": {
+        "models.ErrorBadRequestResponse": {
             "type": "object",
             "properties": {
                 "data": {},
                 "message": {
                     "type": "string",
-                    "example": "Solicitud inválida"
+                    "example": "Bad Request"
                 },
                 "status": {
                     "type": "string",
@@ -174,78 +192,111 @@
                 }
             }
         },
+        "models.ErrorInternalServerErrorResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Internal Server Error"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "error"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 500
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "models.ErrorNotFoundResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Not Found"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "error"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 404
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
         "models.Recipe": {
             "type": "object",
             "properties": {
                 "category": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Chicken"
                 },
                 "created_by": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "@facu.potti"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "A feast for the senses"
                 },
                 "estimated_time": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "15 minutes"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                 },
                 "image_url": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "https://example.com/image.png"
                 },
                 "title": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Chicken Wings"
                 },
                 "total_comments": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 10
                 },
                 "total_likes": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 20
                 },
                 "total_stars": {
-                    "type": "number"
+                    "type": "number",
+                    "example": 4.5
                 }
             }
         },
-        "models.RecipeExampleResponse": {
+        "routes.GetAllRecipeResponseData": {
             "type": "object",
             "properties": {
-                "data": {
-                    "type": "object",
-                    "properties": {
-                        "category": {
-                            "type": "string",
-                            "example": "Chicken"
-                        },
-                        "recipes": {
-                            "type": "array",
-                            "items": {
-                                "type": "object"
-                            }
-                        },
-                        "searchParam": {
-                            "type": "string",
-                            "example": "chicken"
-                        }
+                "category": {
+                    "type": "string",
+                    "example": "Chicken"
+                },
+                "recipes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Recipe"
                     }
                 },
-                "message": {
+                "searchParam": {
                     "type": "string",
-                    "example": "Operación completada con éxito"
-                },
-                "status": {
-                    "type": "string",
-                    "example": "success"
-                },
-                "status_code": {
-                    "type": "integer",
-                    "example": 200
-                },
-                "success": {
-                    "type": "boolean",
-                    "example": true
+                    "example": "chicken"
                 }
             }
         }

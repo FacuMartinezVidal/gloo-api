@@ -12,11 +12,11 @@ definitions:
       success:
         type: boolean
     type: object
-  models.ErrorResponse:
+  models.ErrorBadRequestResponse:
     properties:
       data: {}
       message:
-        example: Solicitud inválida
+        example: Bad Request
         type: string
       status:
         example: error
@@ -28,56 +28,83 @@ definitions:
         example: false
         type: boolean
     type: object
+  models.ErrorInternalServerErrorResponse:
+    properties:
+      data: {}
+      message:
+        example: Internal Server Error
+        type: string
+      status:
+        example: error
+        type: string
+      status_code:
+        example: 500
+        type: integer
+      success:
+        example: false
+        type: boolean
+    type: object
+  models.ErrorNotFoundResponse:
+    properties:
+      data: {}
+      message:
+        example: Not Found
+        type: string
+      status:
+        example: error
+        type: string
+      status_code:
+        example: 404
+        type: integer
+      success:
+        example: false
+        type: boolean
+    type: object
   models.Recipe:
     properties:
       category:
+        example: Chicken
         type: string
       created_by:
+        example: '@facu.potti'
         type: string
       description:
+        example: A feast for the senses
         type: string
       estimated_time:
+        example: 15 minutes
         type: string
       id:
+        example: 1
         type: integer
       image_url:
+        example: https://example.com/image.png
         type: string
       title:
+        example: Chicken Wings
         type: string
       total_comments:
+        example: 10
         type: integer
       total_likes:
+        example: 20
         type: integer
       total_stars:
+        example: 4.5
         type: number
     type: object
-  models.RecipeExampleResponse:
+  routes.GetAllRecipeResponseData:
     properties:
-      data:
-        properties:
-          category:
-            example: Chicken
-            type: string
-          recipes:
-            items:
-              type: object
-            type: array
-          searchParam:
-            example: chicken
-            type: string
-        type: object
-      message:
-        example: Operación completada con éxito
+      category:
+        example: Chicken
         type: string
-      status:
-        example: success
+      recipes:
+        items:
+          $ref: '#/definitions/models.Recipe'
+        type: array
+      searchParam:
+        example: chicken
         type: string
-      status_code:
-        example: 200
-        type: integer
-      success:
-        example: true
-        type: boolean
     type: object
 host: gloo-api-production.up.railway.app
 info:
@@ -112,15 +139,24 @@ paths:
         "200":
           description: Successfully retrieved recipes
           schema:
-            $ref: '#/definitions/models.RecipeExampleResponse'
+            allOf:
+            - $ref: '#/definitions/models.BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/routes.GetAllRecipeResponseData'
+              type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.ErrorResponse'
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/models.ErrorResponse'
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
       summary: Get all recipes
       tags:
       - Recipes
@@ -151,15 +187,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.ErrorResponse'
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
         "404":
           description: Recipe not found
           schema:
-            $ref: '#/definitions/models.ErrorResponse'
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/models.ErrorResponse'
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
       summary: Get recipe by ID
       tags:
       - Recipes
