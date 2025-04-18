@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "gloo-api/docs"
+	"gloo-api/routes"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -46,19 +47,10 @@ func main() {
 		DocExpansion: "none",
 	}))
 
-	api := app.Group("/api")
-	api.Get("/", helloWorld)
+	app.Get("/recipes/:searchParam/:category", routes.GetAllRecipe)
+
 
 	app.Listen(":" + port)
 }
 
-// @Summary		Hello World endpoint
-// @Description	Returns a simple hello world message
-// @Tags			root
-// @Accept			json
-// @Produce		json
-// @Success		200	{string}	string	"Hello, World!"
-// @Router			/ [get]
-func helloWorld(c *fiber.Ctx) error {
-	return c.SendString("Hello, World!")
-}
+
