@@ -23,7 +23,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/recipes/{searchParam}/{category}": {
+        "/recipes": {
             "get": {
                 "description": "Get all recipes by search and category",
                 "consumes": [
@@ -54,6 +54,51 @@ const docTemplate = `{
                     "200": {
                         "description": "Successfully retrieved recipes",
                         "schema": {
+                            "$ref": "#/definitions/models.RecipeExampleResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{id}": {
+            "get": {
+                "description": "Get a specific recipe by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Recipes"
+                ],
+                "summary": "Get recipe by ID",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Recipe ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved recipe",
+                        "schema": {
                             "allOf": [
                                 {
                                     "$ref": "#/definitions/models.BaseResponse"
@@ -62,7 +107,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/routes.GetAllRecipeResponseData"
+                                            "$ref": "#/definitions/models.Recipe"
                                         }
                                     }
                                 }
@@ -72,13 +117,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.BaseResponse"
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Recipe not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/models.BaseResponse"
+                            "$ref": "#/definitions/models.ErrorResponse"
                         }
                     }
                 }
@@ -104,9 +155,34 @@ const docTemplate = `{
                 }
             }
         },
+        "models.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Solicitud inválida"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "error"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
         "models.Recipe": {
             "type": "object",
             "properties": {
+                "category": {
+                    "type": "string"
+                },
                 "created_by": {
                     "type": "string"
                 },
@@ -124,23 +200,55 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string"
+                },
+                "total_comments": {
+                    "type": "integer"
+                },
+                "total_likes": {
+                    "type": "integer"
+                },
+                "total_stars": {
+                    "type": "number"
                 }
             }
         },
-        "routes.GetAllRecipeResponseData": {
+        "models.RecipeExampleResponse": {
             "type": "object",
             "properties": {
-                "category": {
-                    "type": "string"
-                },
-                "recipes": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/models.Recipe"
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "category": {
+                            "type": "string",
+                            "example": "Chicken"
+                        },
+                        "recipes": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        },
+                        "searchParam": {
+                            "type": "string",
+                            "example": "chicken"
+                        }
                     }
                 },
-                "searchParam": {
-                    "type": "string"
+                "message": {
+                    "type": "string",
+                    "example": "Operación completada con éxito"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
                 }
             }
         }
