@@ -1,0 +1,93 @@
+basePath: /api
+definitions:
+  models.BaseResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: string
+      status_code:
+        type: integer
+      success:
+        type: boolean
+    type: object
+  models.Recipe:
+    properties:
+      created_by:
+        type: string
+      description:
+        type: string
+      estimated_time:
+        type: string
+      id:
+        type: integer
+      image_url:
+        type: string
+      title:
+        type: string
+    type: object
+  routes.GetAllRecipeResponseData:
+    properties:
+      category:
+        type: string
+      recipes:
+        items:
+          $ref: '#/definitions/models.Recipe'
+        type: array
+      searchParam:
+        type: string
+    type: object
+host: gloo-api-production.up.railway.app
+info:
+  contact:
+    email: support@gloo.com
+    name: API Support
+  description: API documentation for Gloo
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Gloo API
+  version: "1.0"
+paths:
+  /recipes/{searchParam}/{category}:
+    get:
+      consumes:
+      - application/json
+      description: Get all recipes by search and category
+      parameters:
+      - description: Search term for recipes
+        in: query
+        name: searchParam
+        type: string
+      - description: Category filter for recipes
+        in: query
+        name: category
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved recipes
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/routes.GetAllRecipeResponseData'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.BaseResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.BaseResponse'
+      summary: Get all recipes
+      tags:
+      - Recipes
+schemes:
+- https
+swagger: "2.0"

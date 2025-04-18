@@ -42,12 +42,12 @@ func main() {
 	// Swagger configuration
 	app.Static("/swagger", "./docs")
 	app.Get("/swagger/*", swagger.New(swagger.Config{
-		URL: "https://gloo-api-production.up.railway.app/swagger/swagger.json",
+		URL: "/swagger/swagger.json",
 		DeepLinking: false,
 		DocExpansion: "none",
 	}))
 
-	app.Get("/recipes/:searchParam/:category", routes.GetAllRecipe)
+	app.Get("/recipes", routes.GetAllRecipe)
 
 
 	app.Listen(":" + port)

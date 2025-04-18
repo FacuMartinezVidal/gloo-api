@@ -6,32 +6,28 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-//	@Summary		Get all recipes
-//	@Description	Get all recipes
-//	@Tags			recipes
-//	@Accept			json
-//	@Produce		json
-//	@Success		200	{object}	fiber.Map
-//	@Failure		400	{object}	fiber.Map
-//	@Failure		500	{object}	fiber.Map
-func GetAllRecipe(c *fiber.Ctx) error {
-	searchParam := c.Params("searchParam")
-	category := c.Params("category")
-	return c.JSON(fiber.Map{
-		"status": "success",
-		"status_code": 200,
-		"success": true,
-		"data": []models.Recipe{
-			{
-				ID: 1,
-				Title: "Chicken Wings",
-				Description: "A feast for the senses",
-			},
-		},
-		},
-	})
+type GetAllRecipeResponseData struct {
+	SearchParam string          `json:"searchParam"`
+	Category    string          `json:"category"`
+	Recipes     []models.Recipe `json:"recipes"`
 }
 
+//	@Summary		Get all recipes
+//	@Description	Get all recipes by search and category
+//	@Tags			Recipes
+//	@Accept			json
+//	@Produce		json
+//	@Param			searchParam	query		string												false	"Search term for recipes"
+//	@Param			category	query		string												false	"Category filter for recipes"
+//	@Success		200			{object}	models.BaseResponse{data=GetAllRecipeResponseData}	"Successfully retrieved recipes"
+//	@Failure		400			{object}	models.BaseResponse									"Bad Request"
+//	@Failure		500			{object}	models.BaseResponse									"Internal Server Error"
+//	@Router			/recipes [get]
+func GetAllRecipe(c *fiber.Ctx) error {
+	return c.SendString("GetAllRecipe endpoint - To be implemented")
+}
+
+// TODO: Add Swaggo documentation and implementation for GetRecipeById
 func GetRecipeById(c *fiber.Ctx) error {
-	return c.SendString("Hello, World!")
+	return c.SendString("GetRecipeById endpoint - To be implemented")
 }
