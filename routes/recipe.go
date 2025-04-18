@@ -1,6 +1,10 @@
 package routes
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"gloo-api/models"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 //	@Summary		Get all recipes
 //	@Description	Get all recipes
@@ -17,22 +21,13 @@ func GetAllRecipe(c *fiber.Ctx) error {
 		"status": "success",
 		"status_code": 200,
 		"success": true,
-		"data": fiber.Map{
-			"searchParam": searchParam,
-			"recipes": []fiber.Map{
-				{
-					"id": 1,
-					"name": "Chicken Wings",
-					"description": "A feast for the senses",
-					"likes": 100,
-					"comments": 50,
-					"stars": 4.5,
-					"estimated_time": "1 hour",
-					"category": category,
-					"ingredients": []string{"chicken", "wings", "salt", "pepper"},
-					"instructions": []string{"1. Mix the chicken with salt and pepper", "2. Bake the chicken in the oven for 1 hour", "3. Serve the chicken with wings"},
-				},
+		"data": []models.Recipe{
+			{
+				ID: 1,
+				Title: "Chicken Wings",
+				Description: "A feast for the senses",
 			},
+		},
 		},
 	})
 }
@@ -40,5 +35,3 @@ func GetAllRecipe(c *fiber.Ctx) error {
 func GetRecipeById(c *fiber.Ctx) error {
 	return c.SendString("Hello, World!")
 }
-
-
