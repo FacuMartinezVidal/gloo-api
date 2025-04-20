@@ -29,6 +29,9 @@ definitions:
       description:
         example: onion
         type: string
+      instruction_id:
+        example: 1
+        type: integer
       name:
         example: Chicken
         type: string
@@ -900,6 +903,9 @@ definitions:
       description:
         example: onion
         type: string
+      instruction_id:
+        example: 1
+        type: integer
       name:
         example: Chicken
         type: string

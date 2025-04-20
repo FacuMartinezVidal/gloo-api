@@ -2214,6 +2214,10 @@ const docTemplate = `{
                     "type": "string",
                     "example": "onion"
                 },
+                "instruction_id": {
+                    "type": "integer",
+                    "example": 1
+                },
                 "name": {
                     "type": "string",
                     "example": "Chicken"
@@ -3426,6 +3430,10 @@ const docTemplate = `{
                 "description": {
                     "type": "string",
                     "example": "onion"
+                },
+                "instruction_id": {
+                    "type": "integer",
+                    "example": 1
                 },
                 "name": {
                     "type": "string",
