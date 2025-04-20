@@ -2912,11 +2912,11 @@ const docTemplate = `{
                     "properties": {
                         "duplicate": {
                             "type": "boolean",
-                            "example": true
+                            "example": false
                         },
                         "half": {
                             "type": "boolean",
-                            "example": true
+                            "example": false
                         },
                         "id": {
                             "type": "integer",
@@ -2931,7 +2931,7 @@ const docTemplate = `{
                             "properties": {
                                 "active": {
                                     "type": "boolean",
-                                    "example": true
+                                    "example": false
                                 },
                                 "id": {
                                     "type": "integer",

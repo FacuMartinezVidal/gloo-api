@@ -2909,11 +2909,11 @@
                     "properties": {
                         "duplicate": {
                             "type": "boolean",
-                            "example": true
+                            "example": false
                         },
                         "half": {
                             "type": "boolean",
-                            "example": true
+                            "example": false
                         },
                         "id": {
                             "type": "integer",
@@ -2928,7 +2928,7 @@
                             "properties": {
                                 "active": {
                                     "type": "boolean",
-                                    "example": true
+                                    "example": false
                                 },
                                 "id": {
                                     "type": "integer",

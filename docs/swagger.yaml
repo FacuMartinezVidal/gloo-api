@@ -609,10 +609,10 @@ definitions:
       data:
         properties:
           duplicate:
-            example: true
+            example: false
             type: boolean
           half:
-            example: true
+            example: false
             type: boolean
           id:
             example: 1
@@ -638,7 +638,7 @@ definitions:
           setServing:
             properties:
               active:
-                example: true
+                example: false
                 type: boolean
               id:
                 example: 1
