@@ -51,6 +51,7 @@ type CreateIngredientRequest struct {
 	Unit string `json:"unit" example:"kg"`
 	Quantity string `json:"quantity" example:"100"`
 	Description string `json:"description" example:"onion"`
+	InstructionID int `json:"instruction_id" example:"1"`
 }
 
 type CreateInstructionRequest struct {
