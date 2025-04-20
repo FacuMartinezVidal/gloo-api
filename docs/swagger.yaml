@@ -1696,6 +1696,81 @@ paths:
       summary: Update instruction
       tags:
       - Instructions
+  /likes/{userId}/{recipeId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a like
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Delete a like
+      tags:
+      - Likes
+    post:
+      consumes:
+      - application/json
+      description: Create a like
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Create a like
+      tags:
+      - Likes
   /multiple/{userId}/{recipeId}:
     get:
       consumes:

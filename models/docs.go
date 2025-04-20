@@ -439,3 +439,8 @@ type GetMultipleResponse struct {
 type CreateMultipleRequest struct {
 	Half bool `json:"half" example:"true"`
 }
+
+
+type CreateLikeRequest struct {
+	RecipeID int `json:"recipe_id" example:"1"`
+}
