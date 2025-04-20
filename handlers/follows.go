@@ -20,7 +20,7 @@ func CreateFollow(c *fiber.Ctx) error {
 
 //	@Summary		Delete a follow
 //	@Description	Delete a follow
-//	@Tags			follows
+//	@Tags			Follows
 //	@Accept			json
 //	@Produce		json
 //	@Param			userId		path		string	true	"User ID"

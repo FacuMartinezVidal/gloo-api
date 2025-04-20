@@ -19,7 +19,7 @@ func GetAllNotifications(c *fiber.Ctx) error {
 
 //	@Summary		Get notification by ID
 //	@Description	Get a notification by its ID
-//	@Tags			notifications
+//	@Tags			Notifications
 //	@Accept			json
 //	@Produce		json			
 //	@Param			userId			path		string	true	"User ID"
