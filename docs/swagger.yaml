@@ -52,6 +52,12 @@ definitions:
         example: "1"
         type: string
     type: object
+  models.CreateMultipleRequest:
+    properties:
+      half:
+        example: true
+        type: boolean
+    type: object
   models.CreateNotificationRequest:
     properties:
       actor_id:
@@ -587,6 +593,66 @@ definitions:
         type: object
       message:
         example: Successfully retrieved instruction
+        type: string
+      status:
+        example: success
+        type: string
+      status_code:
+        example: 200
+        type: integer
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.GetMultipleResponse:
+    properties:
+      data:
+        properties:
+          duplicate:
+            example: true
+            type: boolean
+          half:
+            example: true
+            type: boolean
+          id:
+            example: 1
+            type: integer
+          recipe_id:
+            example: 1
+            type: integer
+          set_serving:
+            properties:
+              id:
+                example: 1
+                type: integer
+              ingredient_id:
+                example: 1
+                type: integer
+              quantity:
+                example: 1
+                type: integer
+              unit:
+                example: kg
+                type: string
+            type: object
+          setServing:
+            properties:
+              active:
+                example: true
+                type: boolean
+              id:
+                example: 1
+                type: integer
+              quantity:
+                example: 1
+                type: integer
+            type: object
+          user_id:
+            example: 1
+            type: integer
+        type: object
+      message:
+        example: Successfully retrieved multiple
         type: string
       status:
         example: success
@@ -1630,6 +1696,130 @@ paths:
       summary: Update instruction
       tags:
       - Instructions
+  /multiple/{userId}/{recipeId}:
+    get:
+      consumes:
+      - application/json
+      description: Get a multiple
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetMultipleResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Get a multiple
+      tags:
+      - Multiple
+    post:
+      consumes:
+      - application/json
+      description: Create a multiple
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: string
+      - description: Multiple
+        in: body
+        name: multiple
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateMultipleRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Create a multiple
+      tags:
+      - Multiple
+    put:
+      consumes:
+      - application/json
+      description: Update a multiple
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: string
+      - description: Multiple
+        in: body
+        name: multiple
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateMultipleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Update a multiple
+      tags:
+      - Multiple
   /notifications/{userId}:
     get:
       consumes:

@@ -410,3 +410,32 @@ type CreateFollowRequest struct {
 type DeleteFollowRequest struct {
 	UserID int `json:"user_id" example:"1"`
 }	
+
+type GetMultipleResponse struct {
+	Status     string      `json:"status" example:"success"`
+	StatusCode int         `json:"status_code" example:"200"`
+	Success    bool        `json:"success" example:"true"`
+	Message    string      `json:"message" example:"Successfully retrieved multiple"`
+	Data       struct {
+		ID          int             `json:"id" example:"1"`
+		Half       bool          `json:"half" example:"true"`
+		Duplicate 	bool          `json:"duplicate" example:"true"`
+		RecipeID int `json:"recipe_id" example:"1"`
+		UserID int `json:"user_id" example:"1"`
+		SetServing struct {
+			ID int `json:"id" example:"1"`
+			Active bool `json:"active" example:"true"`
+			Quantity int `json:"quantity" example:"1"`
+		}
+		AmountIngredient struct {
+			ID int `json:"id" example:"1"`
+			Quantity int `json:"quantity" example:"1"`
+			Unit string `json:"unit" example:"kg"`
+			IngredientID int `json:"ingredient_id" example:"1"`
+		} `json:"set_serving"`
+	} `json:"data"`
+}
+
+type CreateMultipleRequest struct {
+	Half bool `json:"half" example:"true"`
+}
