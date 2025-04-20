@@ -418,13 +418,13 @@ type GetMultipleResponse struct {
 	Message    string      `json:"message" example:"Successfully retrieved multiple"`
 	Data       struct {
 		ID          int             `json:"id" example:"1"`
-		Half       bool          `json:"half" example:"true"`
-		Duplicate 	bool          `json:"duplicate" example:"true"`
+		Half       bool          `json:"half" example:"false"`
+		Duplicate 	bool          `json:"duplicate" example:"false"`
 		RecipeID int `json:"recipe_id" example:"1"`
 		UserID int `json:"user_id" example:"1"`
 		SetServing struct {
 			ID int `json:"id" example:"1"`
-			Active bool `json:"active" example:"true"`
+			Active bool `json:"active" example:"false"`
 			Quantity int `json:"quantity" example:"1"`
 		}
 		AmountIngredient struct {
