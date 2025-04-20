@@ -18,6 +18,12 @@ definitions:
         example: 1
         type: integer
     type: object
+  models.CreateFollowRequest:
+    properties:
+      user_id:
+        example: 1
+        type: integer
+    type: object
   models.CreateIngredientRequest:
     properties:
       description:
@@ -44,6 +50,27 @@ definitions:
         type: string
       step:
         example: "1"
+        type: string
+    type: object
+  models.CreateNotificationRequest:
+    properties:
+      actor_id:
+        example: 1
+        type: integer
+      created_by:
+        example: '@facu.potti'
+        type: string
+      description:
+        example: A feast for the senses
+        type: string
+      is_new:
+        example: true
+        type: boolean
+      title:
+        example: Chicken Wings
+        type: string
+      type:
+        example: follow
         type: string
     type: object
   models.CreateRecipeRequest:
@@ -186,6 +213,47 @@ definitions:
         type: array
       message:
         example: Successfully retrieved collections
+        type: string
+      status:
+        example: success
+        type: string
+      status_code:
+        example: 200
+        type: integer
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.GetAllNotificationsResponse:
+    properties:
+      data:
+        items:
+          properties:
+            actor_id:
+              example: 1
+              type: integer
+            created_by:
+              example: '@facu.potti'
+              type: string
+            description:
+              example: A feast for the senses
+              type: string
+            id:
+              example: 1
+              type: integer
+            is_new:
+              example: true
+              type: boolean
+            title:
+              example: Chicken Wings
+              type: string
+            type:
+              example: follow
+              type: string
+          type: object
+        type: array
+      message:
+        example: Successfully retrieved notifications
         type: string
       status:
         example: success
@@ -519,6 +587,45 @@ definitions:
         type: object
       message:
         example: Successfully retrieved instruction
+        type: string
+      status:
+        example: success
+        type: string
+      status_code:
+        example: 200
+        type: integer
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.GetNotificationsByIdResponse:
+    properties:
+      data:
+        properties:
+          actor_id:
+            example: 1
+            type: integer
+          created_by:
+            example: '@facu.potti'
+            type: string
+          description:
+            example: A feast for the senses
+            type: string
+          id:
+            example: 1
+            type: integer
+          is_new:
+            example: true
+            type: boolean
+          title:
+            example: Chicken Wings
+            type: string
+          type:
+            example: follow
+            type: string
+        type: object
+      message:
+        example: Successfully retrieved notification
         type: string
       status:
         example: success
@@ -1147,6 +1254,83 @@ paths:
       summary: Get favorites
       tags:
       - Favorites
+  /follows/{userId}:
+    post:
+      consumes:
+      - application/json
+      description: Create a new follow
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Follow
+        in: body
+        name: follow
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateFollowRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Create a follow
+      tags:
+      - Follows
+  /follows/{userId}/{followId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a follow
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Follow ID
+        in: path
+        name: followId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Delete a follow
+      tags:
+      - follows
   /ingredients/{recipeId}/{ingredientId}:
     delete:
       consumes:
@@ -1446,6 +1630,115 @@ paths:
       summary: Update instruction
       tags:
       - Instructions
+  /notifications/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: Get all notifications for a user
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllNotificationsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Get all notifications
+      tags:
+      - notifications
+    post:
+      consumes:
+      - application/json
+      description: Create a new notification
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Notification
+        in: body
+        name: notification
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateNotificationRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Create a notification
+      tags:
+      - Notifications
+  /notifications/{userId}/{notificationId}:
+    get:
+      consumes:
+      - application/json
+      description: Get a notification by its ID
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Notification ID
+        in: path
+        name: notificationId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetNotificationsByIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Get notification by ID
+      tags:
+      - notifications
   /recipes:
     get:
       consumes:

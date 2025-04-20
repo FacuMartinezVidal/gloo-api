@@ -360,3 +360,53 @@ type GetAllRecipeAdminResponse struct {
 		ImageUrl    string          `json:"image_url" example:"https://example.com/image.png"`
 	} `json:"data"`	
 }
+
+type GetAllNotificationsResponse struct {
+	Status     string      `json:"status" example:"success"`
+	StatusCode int         `json:"status_code" example:"200"`
+	Success    bool        `json:"success" example:"true"`
+	Message    string      `json:"message" example:"Successfully retrieved notifications"`
+	Data       []struct {
+		ID          int             `json:"id" example:"1"`
+		Title       string          `json:"title" example:"Chicken Wings"`
+		Description string          `json:"description" example:"A feast for the senses"`
+		Type string `json:"type" example:"follow"`
+		ActorID int `json:"actor_id" example:"1"`
+		IsNew bool `json:"is_new" example:"true"`
+		CreatedBy string `json:"created_by" example:"@facu.potti"`
+	} `json:"data"`
+}
+
+type GetNotificationsByIdResponse struct {
+	Status     string      `json:"status" example:"success"`
+	StatusCode int         `json:"status_code" example:"200"`
+	Success    bool        `json:"success" example:"true"`
+	Message    string      `json:"message" example:"Successfully retrieved notification"`
+	Data       struct {
+		ID          int             `json:"id" example:"1"`
+		Title       string          `json:"title" example:"Chicken Wings"`
+		Description string          `json:"description" example:"A feast for the senses"`
+		Type string `json:"type" example:"follow"`
+		ActorID int `json:"actor_id" example:"1"`
+		IsNew bool `json:"is_new" example:"true"`
+		CreatedBy string `json:"created_by" example:"@facu.potti"`
+	} `json:"data"`
+}
+
+type CreateNotificationRequest struct {
+	Title string `json:"title" example:"Chicken Wings"`
+	Description string `json:"description" example:"A feast for the senses"`
+	Type string `json:"type" example:"follow"`
+	ActorID int `json:"actor_id" example:"1"`
+	IsNew bool `json:"is_new" example:"true"`
+	CreatedBy string `json:"created_by" example:"@facu.potti"`
+}
+
+
+type CreateFollowRequest struct {
+	UserID int `json:"user_id" example:"1"`
+}
+
+type DeleteFollowRequest struct {
+	UserID int `json:"user_id" example:"1"`
+}	

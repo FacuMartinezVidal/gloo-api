@@ -9,12 +9,12 @@ import (
 //	@Tags			Recipes
 //	@Accept			json
 //	@Produce		json
-//	@Param			searchParam	query		string												false	"Search term for recipes"
-//	@Param			category	query		string												false	"Category filter for recipes"
-//	@Success		200			{object}	models.GetAllRecipesResponse	"Successfully retrieved recipes"
-//	@Failure		400			{object}	models.ErrorBadRequestResponse						"Bad Request"
-//	@Failure		500			{object}	models.ErrorInternalServerErrorResponse				"Internal Server Error"
-//	@Failure		404			{object}	models.ErrorNotFoundResponse						"Not Found"
+//	@Param			searchParam	query		string									false	"Search term for recipes"
+//	@Param			category	query		string									false	"Category filter for recipes"
+//	@Success		200			{object}	models.GetAllRecipesResponse			"Successfully retrieved recipes"
+//	@Failure		400			{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		500			{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Failure		404			{object}	models.ErrorNotFoundResponse			"Not Found"
 //	@Router			/recipes [get]
 func GetAllRecipe(c *fiber.Ctx) error {
 	return c.SendString("GetAllRecipe endpoint - To be implemented")
@@ -26,7 +26,7 @@ func GetAllRecipe(c *fiber.Ctx) error {
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	path		int										true	"Recipe ID"	minimum(1)
-//	@Success		200	{object}	models.GetRecipeByIdResponse	"Successfully retrieved recipe"
+//	@Success		200	{object}	models.GetRecipeByIdResponse			"Successfully retrieved recipe"
 //	@Failure		400	{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		404	{object}	models.ErrorNotFoundResponse			"Recipe not found"
 //	@Failure		500	{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
@@ -43,12 +43,12 @@ func GetRecipeById(c *fiber.Ctx) error {
 //	@Tags			Recipes
 //	@Accept			json
 //	@Produce		json
-//	@Param			id	path		int										true	"Recipe ID"	minimum(1)
-//	@Param			recipe	body	models.UpdateRecipeRequest	true	"Recipe"
-//	@Success		200	{object}	models.UpdateRecipeRequest	"Successfully updated recipe"
-//	@Failure		400	{object}	models.ErrorBadRequestResponse			"Bad Request"
-//	@Failure		404	{object}	models.ErrorNotFoundResponse			"Recipe not found"
-//	@Failure		500	{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Param			id		path		int										true	"Recipe ID"	minimum(1)
+//	@Param			recipe	body		models.UpdateRecipeRequest				true	"Recipe"
+//	@Success		200		{object}	models.UpdateRecipeRequest				"Successfully updated recipe"
+//	@Failure		400		{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		404		{object}	models.ErrorNotFoundResponse			"Recipe not found"
+//	@Failure		500		{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Router			/recipes/{id} [put]
 func UpdateRecipe(c *fiber.Ctx) error {
 	return c.SendString("UpdateRecipe endpoint - To be implemented")
@@ -60,7 +60,7 @@ func UpdateRecipe(c *fiber.Ctx) error {
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	path		int										true	"Recipe ID"	minimum(1)
-//	@Success		200	{object}	models.DeleteRecipeRequest	"Successfully deleted recipe"
+//	@Success		200	{object}	models.DeleteRecipeRequest				"Successfully deleted recipe"
 //	@Failure		400	{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		404	{object}	models.ErrorNotFoundResponse			"Recipe not found"
 //	@Failure		500	{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
@@ -76,10 +76,10 @@ func DeleteRecipe(c *fiber.Ctx) error {
 //	@Accept			json
 //	@Produce		json
 //	@Param			userId	path		int										true	"User ID"	minimum(1)
-//	@Param			recipe	body	models.CreateRecipeRequest	true	"Recipe"	
-//	@Success		200	{object}	models.CreateRecipeRequest	"Successfully created recipe"
-//	@Failure		400	{object}	models.ErrorBadRequestResponse			"Bad Request"
-//	@Failure		500	{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Param			recipe	body		models.CreateRecipeRequest				true	"Recipe"	
+//	@Success		200		{object}	models.CreateRecipeRequest				"Successfully created recipe"
+//	@Failure		400		{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		500		{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Router			/recipes/{userId} [post]
 func CreateRecipe(c *fiber.Ctx) error {
 	return c.SendString("CreateRecipe endpoint - To be implemented")
@@ -91,12 +91,12 @@ func CreateRecipe(c *fiber.Ctx) error {
 //	@Tags			Recipes
 //	@Accept			json
 //	@Produce		json
-//	@Param			recipeId	path		int										true	"Recipe ID"	minimum(1)
-//	@Param			adminId	path		int										true	"Admin ID"	minimum(1)
-//	@Success		200	{object}	models.UpdateResponse	"Successfully updated recipe"
-//	@Failure		400	{object}	models.ErrorBadRequestResponse			"Bad Request"
-//	@Failure		404	{object}	models.ErrorNotFoundResponse			"Recipe not found"
-//	@Failure		500	{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Param			recipeId									path		int										true	"Recipe ID"	minimum(1)
+//	@Param			adminId										path		int										true	"Admin ID"	minimum(1)
+//	@Success		200											{object}	models.UpdateResponse					"Successfully updated recipe"
+//	@Failure		400											{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		404											{object}	models.ErrorNotFoundResponse			"Recipe not found"
+//	@Failure		500											{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Router			/recipes/admin/{recipeId}/{adminId} [post]	
 func UpdateRecipeAdmin(c *fiber.Ctx) error {
 	return c.SendString("UpdateRecipeAdmin endpoint - To be implemented")
@@ -109,10 +109,10 @@ func UpdateRecipeAdmin(c *fiber.Ctx) error {
 //	@Accept			json
 //	@Produce		json
 //	@Param			organizationId	path		int										true	"Organization ID"	minimum(1)
-//	@Success		200	{object}	models.GetAllRecipeAdminResponse	"Successfully retrieved recipe"
-//	@Failure		400	{object}	models.ErrorBadRequestResponse			"Bad Request"
-//	@Failure		404	{object}	models.ErrorNotFoundResponse			"Recipe not found"
-//	@Failure		500	{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Success		200				{object}	models.GetAllRecipeAdminResponse		"Successfully retrieved recipe"
+//	@Failure		400				{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		404				{object}	models.ErrorNotFoundResponse			"Recipe not found"
+//	@Failure		500				{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Router			/recipes/admin/{organizationId} [get]
 func GetAllRecipeAdmin(c *fiber.Ctx) error {
 	return c.SendString("GetAllRecipeAdmin endpoint - To be implemented")

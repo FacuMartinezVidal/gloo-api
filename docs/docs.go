@@ -468,6 +468,122 @@ const docTemplate = `{
                 }
             }
         },
+        "/follows/{userId}": {
+            "post": {
+                "description": "Create a new follow",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Follows"
+                ],
+                "summary": "Create a follow",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Follow",
+                        "name": "follow",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateFollowRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/follows/{userId}/{followId}": {
+            "delete": {
+                "description": "Delete a follow",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "follows"
+                ],
+                "summary": "Delete a follow",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Follow ID",
+                        "name": "followId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/ingredients/{recipeId}/{ingredientId}": {
             "put": {
                 "description": "Update a specific ingredient by its ID",
@@ -894,6 +1010,170 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": "Instruction not found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications/{userId}": {
+            "get": {
+                "description": "Get all notifications for a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notifications"
+                ],
+                "summary": "Get all notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetAllNotificationsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new notification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Create a notification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification",
+                        "name": "notification",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateNotificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications/{userId}/{notificationId}": {
+            "get": {
+                "description": "Get a notification by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notifications"
+                ],
+                "summary": "Get notification by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Notification ID",
+                        "name": "notificationId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetNotificationsByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/models.ErrorNotFoundResponse"
                         }
@@ -1621,6 +1901,15 @@ const docTemplate = `{
                 }
             }
         },
+        "models.CreateFollowRequest": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
         "models.CreateIngredientRequest": {
             "type": "object",
             "properties": {
@@ -1656,6 +1945,35 @@ const docTemplate = `{
                 "step": {
                     "type": "string",
                     "example": "1"
+                }
+            }
+        },
+        "models.CreateNotificationRequest": {
+            "type": "object",
+            "properties": {
+                "actor_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "created_by": {
+                    "type": "string",
+                    "example": "@facu.potti"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "A feast for the senses"
+                },
+                "is_new": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Chicken Wings"
+                },
+                "type": {
+                    "type": "string",
+                    "example": "follow"
                 }
             }
         },
@@ -1856,6 +2174,63 @@ const docTemplate = `{
                 "message": {
                     "type": "string",
                     "example": "Successfully retrieved collections"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetAllNotificationsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "actor_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "created_by": {
+                                "type": "string",
+                                "example": "@facu.potti"
+                            },
+                            "description": {
+                                "type": "string",
+                                "example": "A feast for the senses"
+                            },
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "is_new": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "title": {
+                                "type": "string",
+                                "example": "Chicken Wings"
+                            },
+                            "type": {
+                                "type": "string",
+                                "example": "follow"
+                            }
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved notifications"
                 },
                 "status": {
                     "type": "string",
@@ -2320,6 +2695,60 @@ const docTemplate = `{
                 "message": {
                     "type": "string",
                     "example": "Successfully retrieved instruction"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status_code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "models.GetNotificationsByIdResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "actor_id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "created_by": {
+                            "type": "string",
+                            "example": "@facu.potti"
+                        },
+                        "description": {
+                            "type": "string",
+                            "example": "A feast for the senses"
+                        },
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "is_new": {
+                            "type": "boolean",
+                            "example": true
+                        },
+                        "title": {
+                            "type": "string",
+                            "example": "Chicken Wings"
+                        },
+                        "type": {
+                            "type": "string",
+                            "example": "follow"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Successfully retrieved notification"
                 },
                 "status": {
                     "type": "string",
