@@ -1033,7 +1033,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "notifications"
+                    "Notifications"
                 ],
                 "summary": "Get all notifications",
                 "parameters": [

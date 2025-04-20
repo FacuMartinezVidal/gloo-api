@@ -1662,7 +1662,7 @@ paths:
             $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
       summary: Get all notifications
       tags:
-      - notifications
+      - Notifications
     post:
       consumes:
       - application/json

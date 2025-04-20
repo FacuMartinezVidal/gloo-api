@@ -4,7 +4,7 @@ import "github.com/gofiber/fiber/v2"
 
 //	@Summary		Get all notifications
 //	@Description	Get all notifications for a user
-//	@Tags			notifications
+//	@Tags			Notifications
 //	@Accept			json
 //	@Produce		json
 //	@Param			userId	path		string	true	"User ID"
