@@ -537,7 +537,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "follows"
+                    "Follows"
                 ],
                 "summary": "Delete a follow",
                 "parameters": [
@@ -1140,7 +1140,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "notifications"
+                    "Notifications"
                 ],
                 "summary": "Get notification by ID",
                 "parameters": [
