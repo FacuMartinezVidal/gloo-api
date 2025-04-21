@@ -2333,6 +2333,10 @@ paths:
         name: organizationId
         required: true
         type: integer
+      - description: Type
+        in: query
+        name: type
+        type: string
       produces:
       - application/json
       responses:

@@ -109,6 +109,7 @@ func UpdateRecipeAdmin(c *fiber.Ctx) error {
 //	@Accept			json
 //	@Produce		json
 //	@Param			organizationId	path		int										true	"Organization ID"	minimum(1)
+//	@Param			type				query		string									false	"Type"
 //	@Success		200				{object}	models.GetAllRecipeAdminResponse		"Successfully retrieved recipe"
 //	@Failure		400				{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		404				{object}	models.ErrorNotFoundResponse			"Recipe not found"
