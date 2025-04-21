@@ -456,7 +456,7 @@ type GetRatesResponse struct {
 	StatusCode int         `json:"status_code" example:"200"`
 	Success    bool        `json:"success" example:"true"`
 	Message    string      `json:"message" example:"Successfully retrieved rate"`
-	Data       []struct {
+	Data       struct {
 		ID          int             `json:"id" example:"1"`
 		Rate int `json:"rate" example:"5"`
 		RecipeID int `json:"recipe_id" example:"1"`
