@@ -12,7 +12,7 @@ func SetupUsersRoutes(app *fiber.App) {
 	users := api.Group("/users/:userId")
 	users.Get("/", handlers.GetUserById)
 	users.Get("/profile", handlers.GetProfile)
-	users.Get("/change", handlers.GetChange)
+	users.Get("/changed", handlers.GetChanged)
 	users.Put("/", handlers.UpdateUser)
 }
 
