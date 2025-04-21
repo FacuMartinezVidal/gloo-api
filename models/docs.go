@@ -404,14 +404,6 @@ type CreateNotificationRequest struct {
 	CreatedBy string `json:"created_by" example:"@facu.potti"`
 }
 
-type CreateFavoriteRequest struct {
-	RecipeID int `json:"recipe_id" example:"1"`
-	CollectionID int `json:"collection_id" example:"1"`
-	UserID int `json:"user_id" example:"1"`
-}
-
-
-
 
 type CreateFollowRequest struct {
 	UserID int `json:"user_id" example:"1"`

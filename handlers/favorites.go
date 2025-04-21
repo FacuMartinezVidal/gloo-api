@@ -12,7 +12,7 @@ import "github.com/gofiber/fiber/v2"
 //	@Failure		400		{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		500		{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Failure		404		{object}	models.ErrorNotFoundResponse			"Not Found"
-//	@Router			/favorites/{userId} [get]
+//	@Router			/favorites/{userId}/{collectionId} [get]
 func GetFavorites(c *fiber.Ctx) error {
 	return c.SendString("getFavorites endpoint - To be implemented")
 }
@@ -24,13 +24,12 @@ func GetFavorites(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param userId path string true "User ID"
-// @Param recipeId path string true "Recipe ID"
-// @Param favorite body models.CreateFavoriteRequest true "Favorite"
+// @Param collectionId path string true "Collection ID"
 // @Success 201 {object} models.CreateResponse
 // @Failure 400 {object} models.ErrorBadRequestResponse
 // @Failure 404 {object} models.ErrorNotFoundResponse
 // @Failure 500 {object} models.ErrorInternalServerErrorResponse
-// @Router /favorites/{userId}/{recipeId} [post]	
+// @Router /favorites/{userId}/{collectionId} [post]	
 func CreateFavorite(c *fiber.Ctx) error {
 	return c.SendString("CreateFavorite endpoint - To be implemented")
 }
@@ -47,7 +46,7 @@ func CreateFavorite(c *fiber.Ctx) error {
 // @Failure 400 {object} models.ErrorBadRequestResponse
 // @Failure 404 {object} models.ErrorNotFoundResponse
 // @Failure 500 {object} models.ErrorInternalServerErrorResponse
-// @Router /favorites/{userId}/{recipeId}/{favoriteId} [delete]
+// @Router /favorites/{userId}/{collectionId}/{favoriteId} [delete]
 func DeleteFavorite(c *fiber.Ctx) error {
 	return c.SendString("DeleteFavorite endpoint - To be implemented")
 }

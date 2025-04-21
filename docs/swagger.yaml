@@ -18,18 +18,6 @@ definitions:
         example: 1
         type: integer
     type: object
-  models.CreateFavoriteRequest:
-    properties:
-      collection_id:
-        example: 1
-        type: integer
-      recipe_id:
-        example: 1
-        type: integer
-      user_id:
-        example: 1
-        type: integer
-    type: object
   models.CreateFollowRequest:
     properties:
       user_id:
@@ -1305,7 +1293,7 @@ paths:
       summary: Create comment
       tags:
       - Comments
-  /favorites/{userId}:
+  /favorites/{userId}/{collectionId}:
     get:
       consumes:
       - application/json
@@ -1338,7 +1326,6 @@ paths:
       summary: Get favorites
       tags:
       - Favorites
-  /favorites/{userId}/{recipeId}:
     post:
       consumes:
       - application/json
@@ -1349,17 +1336,11 @@ paths:
         name: userId
         required: true
         type: string
-      - description: Recipe ID
+      - description: Collection ID
         in: path
-        name: recipeId
+        name: collectionId
         required: true
         type: string
-      - description: Favorite
-        in: body
-        name: favorite
-        required: true
-        schema:
-          $ref: '#/definitions/models.CreateFavoriteRequest'
       produces:
       - application/json
       responses:
@@ -1382,7 +1363,7 @@ paths:
       summary: Create a favorite
       tags:
       - Favorites
-  /favorites/{userId}/{recipeId}/{favoriteId}:
+  /favorites/{userId}/{collectionId}/{favoriteId}:
     delete:
       consumes:
       - application/json

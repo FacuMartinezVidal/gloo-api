@@ -418,7 +418,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorites/{userId}": {
+        "/favorites/{userId}/{collectionId}": {
             "get": {
                 "description": "Get favorites",
                 "consumes": [
@@ -466,9 +466,7 @@ const docTemplate = `{
                         }
                     }
                 }
-            }
-        },
-        "/favorites/{userId}/{recipeId}": {
+            },
             "post": {
                 "description": "Create a favorite",
                 "consumes": [
@@ -491,19 +489,10 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "Recipe ID",
-                        "name": "recipeId",
+                        "description": "Collection ID",
+                        "name": "collectionId",
                         "in": "path",
                         "required": true
-                    },
-                    {
-                        "description": "Favorite",
-                        "name": "favorite",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.CreateFavoriteRequest"
-                        }
                     }
                 ],
                 "responses": {
@@ -534,7 +523,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorites/{userId}/{recipeId}/{favoriteId}": {
+        "/favorites/{userId}/{collectionId}/{favoriteId}": {
             "delete": {
                 "description": "Delete a favorite",
                 "consumes": [
@@ -2316,23 +2305,6 @@ const docTemplate = `{
                     "example": 1
                 },
                 "recipe_id": {
-                    "type": "integer",
-                    "example": 1
-                }
-            }
-        },
-        "models.CreateFavoriteRequest": {
-            "type": "object",
-            "properties": {
-                "collection_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "recipe_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "user_id": {
                     "type": "integer",
                     "example": 1
                 }
