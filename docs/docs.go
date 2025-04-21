@@ -468,6 +468,129 @@ const docTemplate = `{
                 }
             }
         },
+        "/favorites/{userId}/{recipeId}": {
+            "post": {
+                "description": "Create a favorite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Create a favorite",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Favorite",
+                        "name": "favorite",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateFavoriteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/favorites/{userId}/{recipeId}/{favoriteId}": {
+            "delete": {
+                "description": "Delete a favorite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Delete a favorite",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Recipe ID",
+                        "name": "recipeId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/follows/{userId}": {
             "post": {
                 "description": "Create a new follow",
@@ -2193,6 +2316,23 @@ const docTemplate = `{
                     "example": 1
                 },
                 "recipe_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "models.CreateFavoriteRequest": {
+            "type": "object",
+            "properties": {
+                "collection_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "recipe_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "user_id": {
                     "type": "integer",
                     "example": 1
                 }

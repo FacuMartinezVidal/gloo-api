@@ -7,6 +7,8 @@ import (
 )
 
 func SetupFavoritesRoutes(router fiber.Router) {
-	favorites := router.Group("/favorites/:userId")
+	favorites := router.Group("/favorites/:userId/:recipeId")
 	favorites.Get("/", handlers.GetFavorites)
+	favorites.Post("/", handlers.CreateFavorite)
+	favorites.Delete("/:favoriteId", handlers.DeleteFavorite)
 }
