@@ -8,6 +8,7 @@ import "github.com/gofiber/fiber/v2"
 //	@Accept			json
 //	@Produce		json
 //	@Param			userId	path		string	true	"User ID"
+//	@Param			type		query		string	false	"Type"
 //	@Success		200		{object}	models.GetAllNotificationsResponse
 //	@Failure		400		{object}	models.ErrorBadRequestResponse
 //	@Failure		404		{object}	models.ErrorNotFoundResponse

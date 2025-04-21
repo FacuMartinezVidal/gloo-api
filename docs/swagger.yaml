@@ -2041,6 +2041,10 @@ paths:
         name: userId
         required: true
         type: string
+      - description: Type
+        in: query
+        name: type
+        type: string
       produces:
       - application/json
       responses:
