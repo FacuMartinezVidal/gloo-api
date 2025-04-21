@@ -8,7 +8,7 @@ import "github.com/gofiber/fiber/v2"
 //	@Accept			json
 //	@Produce		json
 //	@Param			userId	path		string	true	"User ID"
-//	@Param			type		query		string	false	"Type"
+//	@Param			type	query		string	false	"Type"
 //	@Success		200		{object}	models.GetAllNotificationsResponse
 //	@Failure		400		{object}	models.ErrorBadRequestResponse
 //	@Failure		404		{object}	models.ErrorNotFoundResponse
@@ -22,7 +22,7 @@ func GetAllNotifications(c *fiber.Ctx) error {
 //	@Description	Get a notification by its ID
 //	@Tags			Notifications
 //	@Accept			json
-//	@Produce		json			
+//	@Produce		json								
 //	@Param			userId			path		string	true	"User ID"
 //	@Param			notificationId	path		string	true	"Notification ID"
 //	@Success		200				{object}	models.GetNotificationsByIdResponse

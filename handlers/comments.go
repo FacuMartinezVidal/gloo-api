@@ -75,9 +75,39 @@ func CreateComment(c *fiber.Ctx) error {
 
 
 
+//	@Summary		Get all comments	
+//	@Description	Get all comments
+//	@Tags			Comments
+//	@Accept			json
+//	@Produce		json
+//	@Param			recipeId		path		int										true	"Recipe ID"			minimum(1)
+//	@Param			organizationId	path		int										true	"Organization ID"	minimum(1)
+//	@Success		200				{object}	models.GetAllCommentsAdminResponse		"Successfully retrieved all comments"
+//	@Failure		404				{object}	models.ErrorNotFoundResponse			"Not Found"
+//	@Failure		400				{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		500				{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Router			/comments/{recipeId}/{commentId}/admin/{organizationId} [get]
+func GetAllCommentsAdmin(c *fiber.Ctx) error {
+	return c.SendString("GetAllCommentsAdmin endpoint - To be implemented")
+}
 
 
-
+//	@Summary		Update comment
+//	@Description	Update a specific comment by its ID
+//	@Tags			Comments
+//	@Accept			json
+//	@Produce		json
+//	@Param			recipeId		path		int										true	"Recipe ID"			minimum(1)
+//	@Param			commentId		path		int										true	"Comment ID"		minimum(1)
+//	@Param			organizationId	path		int										true	"Organization ID"	minimum(1)
+//	@Success		200				{object}	models.UpdateResponse					"Successfully updated comment"
+//	@Failure		400				{object}	models.ErrorBadRequestResponse			"Bad Request"
+//	@Failure		404				{object}	models.ErrorNotFoundResponse			"Comment not found"
+//	@Failure		500				{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
+//	@Router			/comments/{recipeId}/{commentId}/admin/{organizationId} [put]
+func UpdateCommentAdmin(c *fiber.Ctx) error {
+	return c.SendString("UpdateCommentAdmin endpoint - To be implemented")
+}
 
 
 

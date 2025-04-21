@@ -233,6 +233,56 @@ definitions:
         example: true
         type: boolean
     type: object
+  models.GetAllCommentsAdminResponse:
+    properties:
+      data:
+        items:
+          properties:
+            comment:
+              example: This is a comment
+              type: string
+            created_at:
+              example: "2021-01-01T00:00:00Z"
+              type: string
+            created_by:
+              example: '@facu.potti'
+              type: string
+            father_comment:
+              properties:
+                comment:
+                  example: This is a comment
+                  type: string
+                created_at:
+                  example: "2021-01-01T00:00:00Z"
+                  type: string
+                created_by:
+                  example: '@facu.potti'
+                  type: string
+                id:
+                  example: 1
+                  type: integer
+              type: object
+            id:
+              example: 1
+              type: integer
+            total_likes:
+              example: 100
+              type: integer
+          type: object
+        type: array
+      message:
+        example: Successfully retrieved comments
+        type: string
+      status:
+        example: success
+        type: string
+      status_code:
+        example: 200
+        type: integer
+      success:
+        example: true
+        type: boolean
+    type: object
   models.GetAllNotificationsResponse:
     properties:
       data:
@@ -1265,6 +1315,91 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/models.UpdateCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully updated comment
+          schema:
+            $ref: '#/definitions/models.UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Comment not found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Update comment
+      tags:
+      - Comments
+  /comments/{recipeId}/{commentId}/admin/{organizationId}:
+    get:
+      consumes:
+      - application/json
+      description: Get all comments
+      parameters:
+      - description: Recipe ID
+        in: path
+        minimum: 1
+        name: recipeId
+        required: true
+        type: integer
+      - description: Organization ID
+        in: path
+        minimum: 1
+        name: organizationId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved all comments
+          schema:
+            $ref: '#/definitions/models.GetAllCommentsAdminResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Get all comments
+      tags:
+      - Comments
+    put:
+      consumes:
+      - application/json
+      description: Update a specific comment by its ID
+      parameters:
+      - description: Recipe ID
+        in: path
+        minimum: 1
+        name: recipeId
+        required: true
+        type: integer
+      - description: Comment ID
+        in: path
+        minimum: 1
+        name: commentId
+        required: true
+        type: integer
+      - description: Organization ID
+        in: path
+        minimum: 1
+        name: organizationId
+        required: true
+        type: integer
       produces:
       - application/json
       responses:

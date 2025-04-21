@@ -471,3 +471,25 @@ type CreateRateRequest struct {
 type UpdateRateRequest struct {
 	Rate int `json:"rate" example:"5"`
 }
+
+
+type GetAllCommentsAdminResponse struct {
+	Status     string      `json:"status" example:"success"`
+	StatusCode int         `json:"status_code" example:"200"`
+	Success    bool        `json:"success" example:"true"`
+	Message    string      `json:"message" example:"Successfully retrieved comments"`
+	Data       []struct {
+		ID          int             `json:"id" example:"1"`
+		Comment string `json:"comment" example:"This is a comment"`
+		CreatedAt time.Time `json:"created_at" example:"2021-01-01T00:00:00Z"`
+		CreatedBy string `json:"created_by" example:"@facu.potti"`
+		TotalLikes int `json:"total_likes" example:"100"`
+		FatherComment struct {
+			ID          int             `json:"id" example:"1"`
+			Comment string `json:"comment" example:"This is a comment"`
+			CreatedAt time.Time `json:"created_at" example:"2021-01-01T00:00:00Z"`
+			CreatedBy string `json:"created_by" example:"@facu.potti"`
+		} `json:"father_comment"`
+	} `json:"data"`
+}
+
