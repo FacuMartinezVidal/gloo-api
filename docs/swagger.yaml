@@ -394,7 +394,7 @@ definitions:
         example: true
         type: boolean
     type: object
-  models.GetChangeResponse:
+  models.GetChangedResponse:
     properties:
       data:
         items:
@@ -2457,7 +2457,39 @@ paths:
       summary: Get all suggestions
       tags:
       - Search
-  /users:
+  /users/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: Get user by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved user
+          schema:
+            $ref: '#/definitions/models.GetUserByIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Get user by ID
+      tags:
+      - Users
     put:
       consumes:
       - application/json
@@ -2496,11 +2528,11 @@ paths:
       summary: Update user
       tags:
       - Users
-  /users/{userId}:
+  /users/{userId}/changed:
     get:
       consumes:
       - application/json
-      description: Get user by ID
+      description: Get changed
       parameters:
       - description: User ID
         in: path
@@ -2511,9 +2543,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: Successfully retrieved user
+          description: Successfully retrieved changed
           schema:
-            $ref: '#/definitions/models.GetUserByIdResponse'
+            $ref: '#/definitions/models.GetChangedResponse'
         "400":
           description: Bad Request
           schema:
@@ -2526,43 +2558,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
-      summary: Get user by ID
+      summary: Get changed
       tags:
       - Users
-  /users/change:
-    get:
-      consumes:
-      - application/json
-      description: Get change
-      parameters:
-      - description: User ID
-        in: path
-        name: userId
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Successfully retrieved change
-          schema:
-            $ref: '#/definitions/models.GetChangeResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ErrorBadRequestResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ErrorNotFoundResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
-      summary: Get change
-      tags:
-      - Users
-  /users/profile:
+  /users/{userId}/profile:
     get:
       consumes:
       - application/json

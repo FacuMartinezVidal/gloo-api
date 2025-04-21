@@ -2144,7 +2144,55 @@ const docTemplate = `{
                 }
             }
         },
-        "/users": {
+        "/users/{userId}": {
+            "get": {
+                "description": "Get user by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved user",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetUserByIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
             "put": {
                 "description": "Update user",
                 "consumes": [
@@ -2203,9 +2251,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/users/change": {
+        "/users/{userId}/changed": {
             "get": {
-                "description": "Get change",
+                "description": "Get changed",
                 "consumes": [
                     "application/json"
                 ],
@@ -2215,7 +2263,7 @@ const docTemplate = `{
                 "tags": [
                     "Users"
                 ],
-                "summary": "Get change",
+                "summary": "Get changed",
                 "parameters": [
                     {
                         "type": "string",
@@ -2227,9 +2275,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully retrieved change",
+                        "description": "Successfully retrieved changed",
                         "schema": {
-                            "$ref": "#/definitions/models.GetChangeResponse"
+                            "$ref": "#/definitions/models.GetChangedResponse"
                         }
                     },
                     "400": {
@@ -2253,7 +2301,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/users/profile": {
+        "/users/{userId}/profile": {
             "get": {
                 "description": "Get profile",
                 "consumes": [
@@ -2280,56 +2328,6 @@ const docTemplate = `{
                         "description": "Successfully retrieved profile",
                         "schema": {
                             "$ref": "#/definitions/models.GetProfileResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{userId}": {
-            "get": {
-                "description": "Get user by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Get user by ID",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "userId",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved user",
-                        "schema": {
-                            "$ref": "#/definitions/models.GetUserByIdResponse"
                         }
                     },
                     "400": {
@@ -2906,7 +2904,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.GetChangeResponse": {
+        "models.GetChangedResponse": {
             "type": "object",
             "properties": {
                 "data": {

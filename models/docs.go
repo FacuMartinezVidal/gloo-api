@@ -243,7 +243,7 @@ type GetFavoritesResponse struct {
 }
 
 
-type GetChangeResponse struct{
+type GetChangedResponse struct{
 	Status     string      `json:"status" example:"success"`
 	StatusCode int         `json:"status_code" example:"200"`
 	Success    bool        `json:"success" example:"true"`
