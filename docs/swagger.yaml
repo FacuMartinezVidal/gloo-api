@@ -754,22 +754,20 @@ definitions:
   models.GetRatesResponse:
     properties:
       data:
-        items:
-          properties:
-            id:
-              example: 1
-              type: integer
-            rate:
-              example: 5
-              type: integer
-            recipe_id:
-              example: 1
-              type: integer
-            user_id:
-              example: 1
-              type: integer
-          type: object
-        type: array
+        properties:
+          id:
+            example: 1
+            type: integer
+          rate:
+            example: 5
+            type: integer
+          recipe_id:
+            example: 1
+            type: integer
+          user_id:
+            example: 1
+            type: integer
+        type: object
       message:
         example: Successfully retrieved rate
         type: string

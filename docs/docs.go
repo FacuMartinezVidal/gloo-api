@@ -3664,26 +3664,23 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "data": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "integer",
-                                "example": 1
-                            },
-                            "rate": {
-                                "type": "integer",
-                                "example": 5
-                            },
-                            "recipe_id": {
-                                "type": "integer",
-                                "example": 1
-                            },
-                            "user_id": {
-                                "type": "integer",
-                                "example": 1
-                            }
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "rate": {
+                            "type": "integer",
+                            "example": 5
+                        },
+                        "recipe_id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "user_id": {
+                            "type": "integer",
+                            "example": 1
                         }
                     }
                 },
