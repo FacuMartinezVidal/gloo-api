@@ -29,7 +29,7 @@ func GetUserById(c *fiber.Ctx) error {
 //	@Failure		400		{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		500		{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Failure		404		{object}	models.ErrorNotFoundResponse			"Not Found"
-//	@Router			/users/profile [get]
+//	@Router			/users/{userId}/profile [get]
 func GetProfile(c *fiber.Ctx) error {
 	return c.SendString("getProfile endpoint - To be implemented")
 }
@@ -44,7 +44,7 @@ func GetProfile(c *fiber.Ctx) error {
 //	@Failure		400		{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		500		{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Failure		404		{object}	models.ErrorNotFoundResponse			"Not Found"
-//	@Router			/users/changed [get]
+//	@Router			/users/{userId}/changed [get]
 func GetChanged(c *fiber.Ctx) error {
 	return c.SendString("getChange endpoint - To be implemented")
 }
@@ -61,7 +61,7 @@ func GetChanged(c *fiber.Ctx) error {
 //	@Failure		400		{object}	models.ErrorBadRequestResponse			"Bad Request"
 //	@Failure		500		{object}	models.ErrorInternalServerErrorResponse	"Internal Server Error"
 //	@Failure		404		{object}	models.ErrorNotFoundResponse			"Not Found"
-//	@Router			/users [put]
+//	@Router			/users/{userId} [put]
 func UpdateUser(c *fiber.Ctx) error {
 	return c.SendString("UpdateUser endpoint - To be implemented")
 }
