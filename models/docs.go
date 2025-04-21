@@ -451,3 +451,23 @@ type UpdateFavoriteRequest struct {
 	CollectionID int `json:"collection_id" example:"1"`
 }
 
+type GetRatesResponse struct {
+	Status     string      `json:"status" example:"success"`
+	StatusCode int         `json:"status_code" example:"200"`
+	Success    bool        `json:"success" example:"true"`
+	Message    string      `json:"message" example:"Successfully retrieved rate"`
+	Data       []struct {
+		ID          int             `json:"id" example:"1"`
+		Rate int `json:"rate" example:"5"`
+		RecipeID int `json:"recipe_id" example:"1"`
+		UserID int `json:"user_id" example:"1"`
+	} `json:"data"`
+}
+
+type CreateRateRequest struct {
+	Rate int `json:"rate" example:"5"`
+}
+
+type UpdateRateRequest struct {
+	Rate int `json:"rate" example:"5"`
+}

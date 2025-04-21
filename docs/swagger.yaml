@@ -751,6 +751,38 @@ definitions:
         example: true
         type: boolean
     type: object
+  models.GetRatesResponse:
+    properties:
+      data:
+        items:
+          properties:
+            id:
+              example: 1
+              type: integer
+            rate:
+              example: 5
+              type: integer
+            recipe_id:
+              example: 1
+              type: integer
+            user_id:
+              example: 1
+              type: integer
+          type: object
+        type: array
+      message:
+        example: Successfully retrieved rate
+        type: string
+      status:
+        example: success
+        type: string
+      status_code:
+        example: 200
+        type: integer
+      success:
+        example: true
+        type: boolean
+    type: object
   models.GetRecipeByIdResponse:
     properties:
       data:
@@ -934,6 +966,12 @@ definitions:
       step:
         example: "1"
         type: string
+    type: object
+  models.UpdateRateRequest:
+    properties:
+      rate:
+        example: 5
+        type: integer
     type: object
   models.UpdateRecipeRequest:
     properties:
@@ -2143,6 +2181,172 @@ paths:
       summary: Get notification by ID
       tags:
       - Notifications
+  /rates/{recipeId}/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: Get a rate for a recipe
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetRatesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Get a rate
+      tags:
+      - Rates
+    post:
+      consumes:
+      - application/json
+      description: Create a rate for a recipe
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Create a rate
+      tags:
+      - Rates
+  /rates/{recipeId}/{userId}/{rateId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a rate for a recipe
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: integer
+      - description: Rate ID
+        in: path
+        name: rateId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Delete a rate
+      tags:
+      - Rates
+    put:
+      consumes:
+      - application/json
+      description: Update a rate for a recipe
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: recipeId
+        required: true
+        type: integer
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: integer
+      - description: Rate ID
+        in: path
+        name: rateId
+        required: true
+        type: integer
+      - description: Rate
+        in: body
+        name: rate
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateRateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Update a rate
+      tags:
+      - Rates
   /recipes:
     get:
       consumes:
