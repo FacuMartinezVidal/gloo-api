@@ -446,3 +446,8 @@ type CreateMultipleRequest struct {
 type CreateLikeRequest struct {
 	RecipeID int `json:"recipe_id" example:"1"`
 }
+
+type UpdateFavoriteRequest struct {
+	CollectionID int `json:"collection_id" example:"1"`
+}
+

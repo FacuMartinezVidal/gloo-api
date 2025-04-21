@@ -52,5 +52,23 @@ func DeleteFavorite(c *fiber.Ctx) error {
 }
 
 
+// @Summary Update a favorite
+// @Description Update a favorite
+// @Tags Favorites
+// @Accept json
+// @Produce json
+// @Param userId path string true "User ID"
+// @Param collectionId path string true "Collection ID"
+// @Param favoriteId path string true "Favorite ID"
+// @Param favorite body models.UpdateFavoriteRequest true "Favorite"
+// @Success 200 {object} models.UpdateResponse
+// @Failure 400 {object} models.ErrorBadRequestResponse
+// @Failure 404 {object} models.ErrorNotFoundResponse
+// @Failure 500 {object} models.ErrorInternalServerErrorResponse
+// @Router /favorites/{userId}/{collectionId}/{favoriteId} [put]
+func UpdateFavorite(c *fiber.Ctx) error {
+	return c.SendString("UpdateFavorite endpoint - To be implemented")
+}
+
 
 

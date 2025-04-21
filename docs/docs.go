@@ -524,6 +524,77 @@ const docTemplate = `{
             }
         },
         "/favorites/{userId}/{collectionId}/{favoriteId}": {
+            "put": {
+                "description": "Update a favorite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Update a favorite",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Collection ID",
+                        "name": "collectionId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Favorite ID",
+                        "name": "favoriteId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Favorite",
+                        "name": "favorite",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateFavoriteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorBadRequestResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorNotFoundResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorInternalServerErrorResponse"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "description": "Delete a favorite",
                 "consumes": [
@@ -3533,6 +3604,15 @@ const docTemplate = `{
                 "comment": {
                     "type": "string",
                     "example": "This is a comment"
+                }
+            }
+        },
+        "models.UpdateFavoriteRequest": {
+            "type": "object",
+            "properties": {
+                "collection_id": {
+                    "type": "integer",
+                    "example": 1
                 }
             }
         },

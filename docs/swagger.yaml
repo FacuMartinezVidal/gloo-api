@@ -898,6 +898,12 @@ definitions:
         example: This is a comment
         type: string
     type: object
+  models.UpdateFavoriteRequest:
+    properties:
+      collection_id:
+        example: 1
+        type: integer
+    type: object
   models.UpdateIngredientRequest:
     properties:
       description:
@@ -1399,6 +1405,54 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
       summary: Delete a favorite
+      tags:
+      - Favorites
+    put:
+      consumes:
+      - application/json
+      description: Update a favorite
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Collection ID
+        in: path
+        name: collectionId
+        required: true
+        type: string
+      - description: Favorite ID
+        in: path
+        name: favoriteId
+        required: true
+        type: string
+      - description: Favorite
+        in: body
+        name: favorite
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateFavoriteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorBadRequestResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorNotFoundResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorInternalServerErrorResponse'
+      summary: Update a favorite
       tags:
       - Favorites
   /follows/{userId}:
