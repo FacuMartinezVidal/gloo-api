@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Recipe } from './entities/recipe.entity';
@@ -17,7 +17,15 @@ export class RecipeService {
   }
 
   findAll() {
-    return this.recipeRepository.find();
+    return this.recipeRepository.find({
+      where: {
+        deletedAt: IsNull(),
+      },
+      relations: {
+        ingredients: true,
+        instructions: true,
+      },
+    });
   }
 
   findOne(id: number) {
